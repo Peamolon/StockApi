@@ -1,24 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from './logo.svg';
+import LeftForm from './components/LeftForm';
 import './App.css';
 
 function App() {
+  const [stocks, setStocks] = useState<Array<{ stock: string, price: number }>>([]);
+  const handleAddStock = (stock: string, price: number) => {
+    setStocks(prevStocks => [...prevStocks, { stock, price }]);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Stock price alert</h1>
+      <LeftForm onAddStock={handleAddStock} />
     </div>
   );
 }
