@@ -1,16 +1,21 @@
 import React, {useState} from 'react';
 import logo from './logo.svg';
 import LeftForm from './components/LeftForm';
+import TopCards from './components/TopCards';
 import './App.css';
 
 function App() {
-  const [stocks, setStocks] = useState<Array<{ stock: string, price: number }>>([]);
+  const [stocks, setStocks] = useState([
+    { symbol: 'BTC-USD', currentPrice: 94314.77, changePercent: 0.15, changeAmount: 142.88 },
+    { symbol: 'ETH-USD', currentPrice: 3365.96, changePercent: 1.12, changeAmount: 37.36 },
+    // Añade más acciones según necesario
+  ]);
   const handleAddStock = (stock: string, price: number) => {
-    setStocks(prevStocks => [...prevStocks, { stock, price }]);
+    //setStocks(prevStocks => [...prevStocks, { stock, price }]);
   };
   return (
     <div className="App">
-      <h1>Stock price alert</h1>
+      <TopCards stocks={stocks} />
       <LeftForm onAddStock={handleAddStock} />
     </div>
   );
