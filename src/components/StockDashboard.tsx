@@ -3,9 +3,10 @@ import LeftForm from './LeftForm';
 import TopCards from './TopCards/TopCards';
 import useWebSocket from '../hooks/useWebSocket';
 import { StockInfo } from '../models/StockInfo';
+import StockGraph from './StockGraph';
 
 const StockDashboard: React.FC = () => {
-  const [selectedStocks, setSelectedStocks] = useState<string[]>(['AAPL', 'BINANCE:BTCUSDT', 'IC MARKETS:1']);
+  const [selectedStocks, setSelectedStocks] = useState<string[]>([]);
   const [alertPrice, setAlertPrice] = useState<number>(0);
   const stocks = useWebSocket(selectedStocks);
 
@@ -16,14 +17,11 @@ const StockDashboard: React.FC = () => {
     });
   };
 
-  const handleAlertSet = (price: number) => {
-    setAlertPrice(price);
-  };
-
   return (
     <div>
-      <TopCards stocks={stocks} />
-      <LeftForm onStockSelect={handleStockSelect} onAlertSet={handleAlertSet} />
+      <TopCards stocks={stocks} alertPrice={alertPrice} />
+      <LeftForm onStockSelect={handleStockSelect} onAlertSet={setAlertPrice} />
+      <StockGraph stocks={stocks} />
     </div>
   );
 }
