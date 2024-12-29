@@ -1,22 +1,26 @@
 import React from 'react';
-import { StockInfo } from '../models/StockInfo';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-interface StockGraphProps {
-  stocks: StockInfo[];
+interface StockPrice {
+  date: string;
+  price: number;
 }
 
-const StockGraph: React.FC<StockGraphProps> = ({ stocks }) => {
-  const data = stocks.flatMap(stock => 
-    stock.prices.map(price => ({
-      name: stock.symbol,
-      date: price.date,
-      price: price.price
-    }))
-  );
+interface StockGraphProps {
+  stock: {
+    symbol: string;
+    prices: StockPrice[];
+  };
+}
+
+const StockGraph: React.FC<StockGraphProps> = ({ stock }) => {
+  const data = stock.prices.map(price => ({
+    date: price.date,
+    price: price.price
+  }));
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={200}>
       <LineChart data={data}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
         <CartesianGrid strokeDasharray="3 3" />

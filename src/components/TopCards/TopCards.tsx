@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import StockGraph from '../StockGraph';
 
 interface StockPrice {
   date: string;
@@ -27,20 +28,19 @@ interface CardProps {
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   padding: 20px;
   background: #f4f7fa;
 `;
 
 const Card = styled.div<CardProps>`
-  padding: 0 15px;
-  flex: 0 0 30%;
-  max-width: 70%;
-  margin: 20px 0;
+  padding: 15px;
+  flex: 1 1 300px;
+  margin: 10px;
   box-sizing: border-box;
 
   .card {
-    background-color:
+    background-color: #ffffff;
     border: 1px solid #e1e1e1;
     border-radius: 10px;
     box-shadow: 0 6px 16px rgba(0,0,0,0.1);
@@ -61,15 +61,15 @@ const Card = styled.div<CardProps>`
 
   .card-title {
     color: #333;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
   }
 
   .card-text {
     color: #666;
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.5;
     margin-bottom: 5px;
 
     &.alert-price {
@@ -79,6 +79,18 @@ const Card = styled.div<CardProps>`
 
     &.text-muted {
       color: #bbb;
+    }
+  }
+
+  @media (max-width: 768px) { 
+    flex: 1 1 100%;
+
+    .card-body {
+      align-items: center;
+    }
+
+    .card-title, .card-text {
+      text-align: center;
     }
   }
 `;
@@ -118,6 +130,7 @@ const TopCards: React.FC<TopCardsProps> = ({ stocks, alertPrice }) => {
                   {priceChanges[stock.symbol]}
                 </p>
                 <p className="card-text alert-price">Alert Price: ${alertPrice.toFixed(2)}</p>
+                <StockGraph stock={stock} />
               </div>
             </div>
           </Card>

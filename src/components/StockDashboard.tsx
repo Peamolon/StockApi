@@ -21,7 +21,6 @@ const StockDashboard: React.FC = () => {
     <div>
       <LeftForm onStockSelect={handleStockSelect} onAlertSet={setAlertPrice} />
       <TopCards stocks={stocks} alertPrice={alertPrice} />
-      <StockGraph stocks={stocks} />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const useWebSocket = (symbols, useLiveData = false) => {
           const now = new Date();
           handleNewPrice(symbol, now, simulatedPrice);
         });
-      }, 1000);
+      }, 3000);
       return () => clearInterval(intervalId);
     }
 
