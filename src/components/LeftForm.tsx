@@ -4,61 +4,62 @@ import { searchSymbols } from '../services/finnhubService';
 
 const Form = styled.form`
   padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 60%; // Ajustar al 60% del ancho
-  margin: 40px auto; // Centrar vertical y horizontalmente
-  display: block; // Asegurar que toma el ancho definido
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FormField = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 `;
 
 const Select = styled.select`
   width: 100%;
-  padding: 8px 12px;
+  padding: 12px 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
+  margin-top: 1em;
   background-color: white;
   box-sizing: border-box;
   appearance: none;
   cursor: pointer;
-
   &:focus {
-    border-color: #007bff;
+    border-color: #0056b3;
     outline: none;
   }
 `;
 
 const Label = styled.label`
+  margin-top: 1em;
   font-weight: bold;
-  margin-bottom: 5px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   display: block;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 18px 12px;
+  padding: 12px 15px;
   border: 1px solid #ccc;
-  padding: 10px 12px;
-  border-radius: 4px;
+  border-radius: 8px;
   box-sizing: border-box;
 `;
 
 const Button = styled.button`
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
+  margin-top: 3em;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
-
+  transition: all 0.3s ease;
   &:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
   }
 `;
 
@@ -76,7 +77,7 @@ const LeftForm: React.FC<LeftFormProps> = ({ onStockSelect, onAlertSet }) => {
   const handleSymbolSearch = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value;
     setSelectedSymbol(query);
-    if (query.length > 2) { 
+    if (query.length > 2) {
       const results = await searchSymbols(query);
       setSymbols(results);
     }
