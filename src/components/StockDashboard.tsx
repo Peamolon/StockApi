@@ -19,8 +19,8 @@ const StockDashboard: React.FC = () => {
 
   return (
     <div>
-      <TopCards stocks={stocks} alertPrice={alertPrice} />
       <LeftForm onStockSelect={handleStockSelect} onAlertSet={setAlertPrice} />
+      <TopCards stocks={stocks} alertPrice={alertPrice} />
       <StockGraph stocks={stocks} />
     </div>
   );
